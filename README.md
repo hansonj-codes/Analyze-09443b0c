@@ -1,21 +1,25 @@
-Task: Analyze
+# Analyze-09443b0c
 
-Brief: You are given two attachments: execute.py and data.xlsx.
+This repository contains a small data processing script intended to be run in CI and published via GitHub Pages.
 
-- Commit execute.py after fixing the non-trivial error in it.
-- Ensure it runs on Python 3.11+ with Pandas 2.3.
-- Convert data.xlsx to data.csv and commit it.
-- Add a GitHub Actions push workflow at .github/workflows/ci.yml that:
-  - Runs ruff and shows its results in the CI log
-  - Runs: python execute.py > result.json
-  - Publishes result.json via GitHub Pages
-- Do not commit result.json; it must be generated in CI.
+What is included
+- execute.py — Python 3.11+ script that reads data.csv and writes result.json
+- data.csv — CSV converted from the provided data.xlsx
+- .github/workflows/ci.yml — GitHub Actions workflow that lints with ruff, runs the script, and publishes result.json to GitHub Pages
 
-Checks:
-- execute.py, data.csv, and .github/workflows/ci.yml exist
-- result.json is NOT committed
-- execute.py does not contain the typo "revenew"
-- data.csv content equals data.xlsx (attachment)
-- CI YAML has steps for ruff, executing execute.py, and Pages deploy
-- GitHub Actions ran for this commit and logs show ruff + execute.py
-- result.json is published on GitHub Pages
+Usage
+- Locally:
+  - Ensure Python 3.11+ and pandas 2.3 are installed:
+    pip install pandas==2.3.0 openpyxl
+  - Run:
+    python execute.py
+  - This will produce result.json
+
+- CI:
+  - On push to main, the workflow runs ruff, executes execute.py, and publishes result.json to GitHub Pages.
+
+Notes
+- Do not commit result.json — it is generated in CI and published to Pages.
+- The CSV was produced from the provided Excel attachment and included here as data.csv for easy execution.
+
+Commit message for this change is included in the repository as well.
